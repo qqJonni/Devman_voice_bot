@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
-TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 vk_session = vk_api.VkApi(token=os.environ.get('TOKEN_VK'))
 
 longpoll = VkLongPoll(vk_session)

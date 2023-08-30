@@ -5,7 +5,7 @@ import vk_api as vk
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
-def echo(event, vk_api):
+async def echo(event, vk_api):
     vk_api.messages.send(
         user_id=event.user_id,
         message=event.text,

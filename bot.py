@@ -11,7 +11,7 @@ dp = Dispatcher(bot)
 
 
 # Define the handler for the "/start" command
-@dp.message_handler(commands=['start'])
+@dp.message_handler()
 async def start_command(message: types.Message):
     # Call the detect_intent_texts function and pass the necessary parameters
     await detect_intent_texts('devmanvoicebot-ysve', str(message.from_user.id), message.text, 'ru')
@@ -41,7 +41,7 @@ async def detect_intent_texts(project_id, session_id, text, language_code):
             response.query_result.intent_detection_confidence,
         )
     )
-    print("Fulfillment text: {}\n".format(response.query_result.fulfillment_text))
+    print("Fulfillment text: {}\n".format(response.query_result.intent))
 
     # Send the fulfillment text back to the user on Telegram
     await bot.send_message(chat_id=session_id, text=response.query_result.fulfillment_text)
@@ -50,3 +50,4 @@ async def detect_intent_texts(project_id, session_id, text, language_code):
 # Start the bot
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+

@@ -19,18 +19,22 @@ def detect_intent_texts(project_id, session_id, text, language_code):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
+    if response.query_result.intent.is_fallback is True:
+        pass
+    else:
 
-    print("=" * 20)
-    print("Query text: {}".format(response.query_result.query_text))
-    print(
-        "Detected intent: {} (confidence: {})\n".format(
-            response.query_result.intent.display_name,
-            response.query_result.intent_detection_confidence,
+        print("=" * 20)
+        print("Query text: {}".format(response.query_result.query_text))
+        print(
+            "Detected intent: {} (confidence: {})\n".format(
+                response.query_result.intent.display_name,
+                response.query_result.intent_detection_confidence,
+                response.query_result.intent.is_fallback
+            )
         )
-    )
-    print("Fulfillment text: {}\n".format(response.query_result.intent))
+        print("Fulfillment text: {}\n".format(response.query_result.intent))
 
-    vk_api.messages.send(user_id=event.user_id, message=response.query_result.fulfillment_text, random_id=random.randint(1,1000))
+        vk_api.messages.send(user_id=event.user_id, message=response.query_result.fulfillment_text, random_id=random.randint(1,1000))
 
 
 if __name__ == "__main__":

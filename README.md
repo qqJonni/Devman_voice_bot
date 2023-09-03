@@ -69,7 +69,7 @@ TOKEN_VK=ваш_токен_vk_api
 Запуск скриптов выполняется командой:
 
 ```sh
-python bot.py
+python Telegram_bot.py
 python VK_bot.py
 ```
 ### Тренировка бота

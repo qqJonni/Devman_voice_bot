@@ -72,3 +72,11 @@ TOKEN_VK=ваш_токен_vk_api
 python bot.py
 python VK_bot.py
 ```
+### Тренировка бота
+
+Для обучения бота новым сценариям, необходимо перейти на сайт [dialogflow](https://dialogflow.cloud.google.com/),
+создать нового агента.
+Во вкладке Intents появится возможность создавать сценарии диалогов.
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)

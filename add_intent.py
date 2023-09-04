@@ -1,14 +1,14 @@
 import json
 from google.cloud import dialogflow
 
-with open("intent.json", "r") as file:
+
+with open(input('Введите название файла: '), "r") as file:
     intent_json = file.read()
-intent = json.loads(intent_json)
+intent_data = json.loads(intent_json)
 
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
     """Create an intent of the given intent type."""
-
     intents_client = dialogflow.IntentsClient()
 
     parent = dialogflow.AgentsClient.agent_path(project_id)
@@ -29,10 +29,12 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
         request={"parent": parent, "intent": intent}
     )
 
+# Extract the intent data from the JSON file
+intent_data = json.loads(intent_json)
 
-questions = intent["Устройство на работу"]
-answer = intent.get("answer")
-
+# Assuming the intent data has the following structure
+questions = intent_data["Устройство на работу"]["questions"]
+answer = intent_data["Устройство на работу"]["answer"]
 
 if __name__ == '__main__':
     create_intent('devmanvoicebot-ysve', 'to_get_job', questions, answer)

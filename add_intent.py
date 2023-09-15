@@ -1,5 +1,8 @@
+import os
 import json
 from google.cloud import dialogflow
+import argparse
+from dotenv import load_dotenv, find_dotenv
 
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
@@ -26,13 +29,23 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 
 
 def main():
-    with open('intent.json', "r") as file:
+    with open(f'{namespace}', "r") as file:
         intent_json = file.read()
     intent_data = json.loads(intent_json)
 
     for title, intent in intent_data.items():
-        create_intent('devmanvoicebot-ysve', f'{title}', f'{intent["questions"]}', f'{intent["answer"]}')
+        create_intent(os.environ.get('PROJECT_ID'), title, intent["questions"], intent["answer"])
+
+
+def createParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('intent_name', default='intent.json', nargs='?')
+
+    return parser
 
 
 if __name__ == '__main__':
+    load_dotenv(find_dotenv())
+    parser = createParser()
+    namespace = parser.parse_args()
     main()

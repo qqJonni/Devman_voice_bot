@@ -80,3 +80,7 @@ python VK_bot.py
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
+
+Данное приложение реализует возможность загрузки новых интентов на сайт 
+Dialogflow в формате json (см. пример "intent.json"). Для этого необходимо
+ прописать команду python add_intent.py <название файла>

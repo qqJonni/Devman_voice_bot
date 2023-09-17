@@ -29,7 +29,10 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 
 
 def main():
-    with open(f'{namespace}', "r") as file:
+    load_dotenv(find_dotenv())
+    parser = create_parser()
+    namespace = parser.parse_args()
+    with open(namespace.intent_name, "r") as file:
         intent_json = file.read()
     intent_data = json.loads(intent_json)
 
@@ -37,7 +40,7 @@ def main():
         create_intent(os.environ.get('PROJECT_ID'), title, intent["questions"], intent["answer"])
 
 
-def createParser():
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('intent_name', default='intent.json', nargs='?')
 
@@ -45,7 +48,4 @@ def createParser():
 
 
 if __name__ == '__main__':
-    load_dotenv(find_dotenv())
-    parser = createParser()
-    namespace = parser.parse_args()
     main()

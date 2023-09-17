@@ -6,6 +6,7 @@ from detect_intent_texts import detect_intent_texts
 
 
 def start():
+    load_dotenv(find_dotenv())
     bot = Bot(token=os.environ.get('TELEGRAM_TOKEN'))
     dp = Dispatcher(bot)
     dp.register_message_handler(lambda message: send_message(message, bot))
@@ -24,5 +25,4 @@ async def send_message(message: types.Message, bot: Bot):
 
 # Start the bot
 if __name__ == '__main__':
-    load_dotenv(find_dotenv())
     start()

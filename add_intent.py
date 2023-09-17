@@ -28,7 +28,7 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
     return response
 
 
-def main():
+def start():
     load_dotenv(find_dotenv())
     parser = create_parser()
     namespace = parser.parse_args()
@@ -48,4 +48,4 @@ def create_parser():
 
 
 if __name__ == '__main__':
-    main()
+    start()

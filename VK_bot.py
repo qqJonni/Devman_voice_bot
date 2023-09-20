@@ -14,7 +14,7 @@ def start():
     vk_api = vk_session.get_api()
     for event in VkLongPoll(vk_session).listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            response = detect_intent_texts(os.environ.get('PROJECT_ID'), vk_session, event.text, 'ru')
+            response = detect_intent_texts(os.environ.get('PROJECT_ID'), id(vk_session), event.text, 'ru')
             if not response:
                 vk_api.messages.send(user_id=event.user_id, message="На этот вопрос Вам ответит менеджер", random_id=0)
             else:
